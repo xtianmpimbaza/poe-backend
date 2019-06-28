@@ -1,27 +1,5 @@
 <?php
-// array holding allowed Origin domains
-$allowedOrigins = array(
-    '(http(s)://)?(www\.)?my\-domain\.com'
-);
-
-if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] != '') {
-    foreach ($allowedOrigins as $allowedOrigin) {
-        if (preg_match('#' . $allowedOrigin . '#', $_SERVER['HTTP_ORIGIN'])) {
-            header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
-            header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-            header('Access-Control-Max-Age: 1000');
-            header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-            break;
-        }
-    }
-}
-require 'ipfs/IPFS.php';
-
-use Cloutier\PhpIpfsApi\IPFS;
-
-// connect to ipfs daemon API server
-$ipfs = new IPFS("127.0.0.1", "8080", "5001");
-$conn = mysqli_connect('127.0.0.1', 'root', '', 'mediadap');
+include 'connect.php';
 if (isset($_FILES["file"]["type"]) && isset($_POST['title'])) {
 
     $filename = $_FILES["file"]["name"];
@@ -53,7 +31,7 @@ if (isset($_FILES["file"]["type"]) && isset($_POST['title'])) {
 //        } else {
             $hash = $ipfs->add($imageContent);
 
-            mysqli_query($conn, "INSERT INTO `media` (`id`, `user_id`, `title`, `type`) VALUES (NULL, '1', '$title', 'image')");
+            mysqli_query($conn, "INSERT INTO `media` (`id`, `user_id`, `title`) VALUES (NULL, '1', '$title')");
             $id = mysqli_insert_id($conn);
             print_r(json_encode(array('saved' => 1, 'id' => $id, 'user' => 1, 'title' => $title, 'hash' => $hash)));
 //        }

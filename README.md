@@ -1,8 +1,10 @@
 # proof-of-exisitence-backend
 Clone the repo
 ```
-git@github.com:xtianmpimbaza/proof-of-exisitence-backend.git
+git clone git@github.com:xtianmpimbaza/poe-backend.git
 ```
 import mediadapp.sql in your databases and
 add the files to your server<br>
-Run the dapp.
+Configure credentials in connect.php <br>
+Start ipfs<br>
+Run the frontend dapp.

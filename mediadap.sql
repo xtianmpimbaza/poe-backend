@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 21, 2019 at 06:37 PM
+-- Generation Time: Jun 28, 2019 at 05:24 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.3.5
 
@@ -35,8 +35,6 @@ CREATE TABLE IF NOT EXISTS `media` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `hash` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
